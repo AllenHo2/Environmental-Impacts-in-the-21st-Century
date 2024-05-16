@@ -4,6 +4,7 @@
 
 - [Link](#link)
 - [Installation](#installation)
+- [Features](#features)
 - [Connect](#connect)
 
 
@@ -30,6 +31,14 @@ git add <FILES>
 git commit -m "<COMMIT_MESSAGES>"
 git push
 ```
+
+## Features
+<ul>
+    <li>All charts have interactions (Hoverable and highlights)</li>
+    <li>Dots Visibility for line chart in case one might want to inspect data values</li>
+    <li>Hover over Parallel Coordinates Chart requires precision on the highlighted year line</li>
+    <li>Hovering features / tooltips takes a few seconds to load</li>
+</ul>
 
 ## Connect
 <a href="https://www.linkedin.com/in/allen-ho-b67a6725b/"><img width="58" alt="Linkedin_icon" src="https://github.com/AllenHo2/project02-Elevator/assets/112123839/38209676-0df8-4cdf-a99e-e172deb63854" href="https://www.linkedin.com/in/allen-ho-b67a6725b/"></img></a>

@@ -17,24 +17,24 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/bc5f32e18e66cac9041831a3ae10
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-var aqiValues = Array.from(new Set(data.map(function(d) { return Math.floor(+d["AQI"]); })));
+    var aqiValues = Array.from(new Set(data.map(function(d) { return Math.floor(+d["AQI"]); })));
 
-// Include 46 in the AQI values and sort them
-aqiValues.push(46);
-aqiValues.sort((a, b) => a - b);
+    // Include 46 in the AQI values and sort them
+    aqiValues.push(46);
+    aqiValues.sort((a, b) => a - b);
 
-// Define scales for x and y axes
-var x = d3.scaleBand()
-  .domain(aqiValues) 
-  .range([0, w])
-  .padding(0.2); 
+    // Define scales for x and y axes
+    var x = d3.scaleBand()
+      .domain(aqiValues) 
+      .range([0, w])
+      .padding(0.2); 
 
     var y = d3.scaleLinear()
       .domain([d3.min(data, function(d) { return d["Gas"] }), d3.max(data, function(d) { return d["Gas"] })])
       .nice()
       .range([h, 0]);
 
-
+    //Drawing data points
 svg.selectAll('.dot')
     .data(data)
     .enter()
@@ -48,7 +48,7 @@ svg.selectAll('.dot')
     .append('title')
     .text((d) => 'GreenHouse Gas Emission: ' + d['Gas'] + ', AQI: ' + d['AQI'] + ', Year: ' + d['Years']);
 
-
+    //X Axis and ticks
     svg.append("g")
       .attr("class", "axis")
       .style("stroke", "black")
@@ -58,6 +58,7 @@ svg.selectAll('.dot')
       .style("font-size", 20)
       .style("fill", "0");
 
+    //Y Axis and ticks
     var yAxis = d3.axisLeft()
                   .scale(y)
                   .tickFormat(function(d){return d/1000000000 + " Billion"});
@@ -67,20 +68,20 @@ svg.selectAll('.dot')
     .style("font-size", 15)
     .call(yAxis);
 
-  svg.append("text")
-    .attr("x", w / 2)
-    .attr("y", h + margin.bottom / 2)
-    .attr("text-anchor", "middle")
-    .text("")
-    .style("font-size", "14px");
-
-
     svg.append("text")
-    .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
-    .style("text-anchor", "middle")
-    .style('stroke', "black")
-    .text("Average Air Quality Index experienced by Humans");
+      .attr("x", w / 2)
+      .attr("y", h + margin.bottom / 2)
+      .attr("text-anchor", "middle")
+      .text("")
+      .style("font-size", "14px");
 
+    //X Axis Label
+    svg.append("text")
+      .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
+      .style("text-anchor", "middle")
+      .style('stroke', "black")
+      .text("Average Air Quality Index experienced by Humans");
+    //Y Axis Label
     svg.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
@@ -91,23 +92,23 @@ svg.selectAll('.dot')
       .text("GreenHouse Gas Emissions in tons");
 
   
-      // Calculate regression line
-      var xValues = data.map(d => Math.floor(+d["AQI"]));
-      var yValues = data.map(d => +d['Gas']);
-      var regression = d3.regressionLinear()(xValues.map((d, i) => [d, yValues[i]]));
+    // Calculate regression line
+    var xValues = data.map(d => Math.floor(+d["AQI"]));
+    var yValues = data.map(d => +d['Gas']);
+    var regression = d3.regressionLinear()(xValues.map((d, i) => [d, yValues[i]]));
   
       // Draw regression line
-      svg.append("line")
-        .attr("class", "regression-line")
-        .attr("x1", x(regression[0][0]))
-        .attr("y1", y(regression[0][1]))
-        .attr("x2", x(regression[1][0]))
-        .attr("y2", y(regression[1][1]))
-        .style("stroke", "blue")
-        .style("stroke-width", 2);
-        
-        console.log("xValues:", xValues);
-        console.log("yValues:", yValues);
-        console.log("Regression:", regression);
+    svg.append("line")
+      .attr("class", "regression-line")
+      .attr("x1", x(regression[0][0]))
+      .attr("y1", y(regression[0][1]))
+      .attr("x2", x(regression[1][0]))
+      .attr("y2", y(regression[1][1]))
+      .style("stroke", "blue")
+      .style("stroke-width", 2);
+      //debugging
+      console.log("xValues:", xValues);
+      console.log("yValues:", yValues);
+      console.log("Regression:", regression);
         
   })
