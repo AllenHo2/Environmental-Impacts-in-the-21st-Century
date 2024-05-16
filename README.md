@@ -13,7 +13,9 @@
 <a href="https://allenho2.github.io/Environmental-Impacts-in-the-21st-Century/">https://allenho2.github.io/Environmental-Impacts-in-the-21st-Century/</a>
 
 ## Installation
-To install and clone my repository, first fork it by going to <a href="https://github.com/AllenHo2/Environmental-Impacts-in-the-21st-Century">https://github.com/AllenHo2/Environmental-Impacts-in-the-21st-Century</a>
+To install and clone my repository, first fork it by going to: 
+</br>
+<a href="https://github.com/AllenHo2/Environmental-Impacts-in-the-21st-Century">https://github.com/AllenHo2/Environmental-Impacts-in-the-21st-Century</a>
 </br>
 Then use git clone through the ssh key using a command similar to 
 ```bash
