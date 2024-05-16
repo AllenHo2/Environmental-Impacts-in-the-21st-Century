@@ -18,6 +18,7 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/60e931802e00bba842a25c07181f
     .append('g')
     .attr('transform',`translate(${margin.left},${margin.top})`,);
 
+    //sequential color scale
   var myColor = d3
     .scaleLinear()
     .domain([5000000000000000000, 8150000000000000000])
@@ -29,7 +30,7 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/60e931802e00bba842a25c07181f
     .domain(
       data.map(function (d) { return d['Years']; }))
     .range([0, w])
-    .padding(0.2); // Adjust padding as needed
+    .padding(0.2); 
 
   var y = d3
     .scaleLinear()
@@ -52,8 +53,8 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/60e931802e00bba842a25c07181f
     .attr('fill', function (d) {return myColor(d['Fuel']);})
     .append('title')
     .text((d) => d['Fuel'] + ' Fuel');
-
-    svg
+  //X axis
+  svg
     .append('g')
     .attr('class', 'axis')
     .attr('transform', 'translate( 0 , ' + h + ')')
@@ -62,28 +63,28 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/60e931802e00bba842a25c07181f
     .style('font-size', 20)
     .style('stroke', "black")
     .style('fill', '0');
-
-  var yAxis = d3.axisLeft().scale(y).tickFormat(function(d){return d/1000000000000000000 + " Quintillion"});
+  //Y Axis
+  var yAxis = d3.axisLeft().scale(y).tickFormat(function(d){return d/1000000000000000000 + " Quintillion"}); //Shorten tick label
   svg.append('g')
   .attr('class', 'axis')
   .call(yAxis)
   .style('font-size', 12)
   .style('stroke', "black");
-
+  //Legend
   svg
     .append('g')
     .attr('class', 'legendSequential')
     .style('stroke', "black")
     .attr('transform', 'translate(960,14)');
-
+  //Legend Label
   svg
     .append('text')
     .attr('transform', 'translate(960,2)')
     .style('font-size', '12px')
     .style('stroke', "black")
     .text("Fossil Fuel in BTU");
-
-    var legendSequential = d3
+ 
+  var legendSequential = d3
     .legendColor()
     .shapeWidth(30)
     .cells(5)
@@ -92,28 +93,28 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/60e931802e00bba842a25c07181f
     .labelFormat(d3.format(".1"));
 
 
+  //call legend
+  svg.select('.legendSequential')
+    .call(legendSequential)
+    .selectAll("text")
+    .style("font-size", 15) 
+    .style("stroke", "black"); 
 
-svg.select('.legendSequential')
-  .call(legendSequential)
-  .selectAll("text")
-  .style("font-size", 15) // Set the font size to match your y-axis labels
-  .style("stroke", "black"); // Set the font color to match your y-axis labels
-
-    
+  //Y Axis Label
   svg.append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("y", 0 - margin.left)
-  .attr("x",0 - (h / 2))
-  .attr("dy", "1em")
-  .style("text-anchor", "middle")
-  .style("font-size", 20)
-  .style("stroke", "black")
-  .text("Fossil Fuels in BTU");
-
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (h / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .style("font-size", 20)
+    .style("stroke", "black")
+    .text("Fossil Fuels in BTU");
+  //X Axis Label
   svg.append("text")
-  .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
-  .style("text-anchor", "middle")
-  .style("font-size", 20)
-  .style("stroke", "black")
-  .text("Year");
+    .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .style("font-size", 20)
+    .style("stroke", "black")
+    .text("Year");
 });

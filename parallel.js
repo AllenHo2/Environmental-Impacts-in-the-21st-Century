@@ -4,7 +4,7 @@ var margin = {top: 30, right: 30, bottom: 70, left: 40},
     height = 600 - margin.top - margin.bottom;
 var barPadding = 1;
 
-// append the svg object to the body of the page
+// append the svg object to the div of the page
 const svg = d3.select("#parallelChart")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -38,7 +38,7 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/c37391c52789b4e93dd53b32e55f
       return d3.line()(dimensions.map(function(p) { return [x(p), y[p](d[p])]; }));
   }
 
-
+  //highlight path in red if selected from dropdown menu
   function highlight(year) {
     svg.selectAll(".paths")
       .style("stroke", function(d) {
@@ -92,17 +92,20 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/c37391c52789b4e93dd53b32e55f
       .text(function(d) { return d; })
       .style("fill", "black");
 
+  //append dropdown menu
   var dropdown = d3.select("#parallelChart")
     .append("select")
 
   var years = ["Year", ...new Set(data.map(d => d.Years))]; 
 
+  //set up dropdown menu with data from years
   dropdown.selectAll("option")
     .data(years)
     .enter().append("option")
     .attr("value", function(d) { return d; })
     .text(function(d) { return d; });
 
+  //select year and highlight, else if none is selected, disable all highlighting
   dropdown.on("change", function() {
     var selectedYear = this.value;
     if (selectedYear === "None") {

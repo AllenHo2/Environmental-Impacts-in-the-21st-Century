@@ -7,7 +7,8 @@ var barPadding = 1;
 // Load the CSV data
 d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f6693881e40/raw/643ed2db8210a15fbba086084d72da989bea23e2/AQI.csv")
   .then(function(data) {
-
+      
+    //Dots Visible when first ran
     var dotsVisible = true;
     // Create the SVG element
     var svg = d3.select("#lineChart")
@@ -21,6 +22,7 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f669388
     const x = d3.scaleBand()
       .domain( data.map(function (d) { return d['Years']; }))
       .range([0, w])
+    //X Axis
       svg
       .append('g')
       .attr('class', 'axis')
@@ -35,12 +37,15 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f669388
       .domain([d3.min(data, d => (+d["AQI"])), d3.max(data, d => (+d["AQI"]))])
       .nice()
       .range([h, 0]);
+
+    //Y Axis
     svg.append("g")
       .attr("class", "axis")
       .style('stroke', "black")
       .style('font-size', 20)
       .call(d3.axisLeft(y))
       
+    //Line/path connecting
     svg.append("path")
       .datum(data)
       .attr("fill", "none")
@@ -52,6 +57,7 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f669388
         .y(d => (y(+d["AQI"])))
         )
 
+    //Data Points plotting
     svg.selectAll(".dot")
         .data(data)
         .enter().append("circle")
@@ -63,14 +69,16 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f669388
         .style("stroke", "black")
         .append("title")
         .text(d => ("AQI: " + (+d["AQI"]) + " Year: " + (d["Years"])));
-   
-      svg.append("text")
+
+    //X Axis Label
+    svg.append("text")
       .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
       .style("text-anchor", "middle")
       .style('stroke', "black")
       .text("Year");
-  
-      svg.append("text")
+
+    //Y Axis Label
+    svg.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left)
         .attr("x",0 - (h / 2))
@@ -78,20 +86,6 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f669388
         .style("text-anchor", "middle")
         .style('stroke', "black")
         .text("Average Air Quality Index experienced by Humans");
-
-      //   function zoomed(event) {
-      //     svg.attr("transform", event.transform);
-      //     svg.select(".x.axis").call(d3.axisBottom(x).scale(event.transform.rescaleX(x)));
-      //     svg.select(".y.axis").call(d3.axisBottom(x).scale(event.transform.rescaleX(y)));
-      // }
-
-      //   // Define zoom behavior
-      //   var zoom = d3.zoom()
-      //       .scaleExtent([1, 10])
-      //       .on("zoom", zoomed);
-
-      //   // Apply zoom behavior to the SVG
-      //   svg.call(zoom);
 
   // Function to toggle visibility of dots
         function toggleDotsVisibility() {
@@ -103,7 +97,7 @@ d3.csv("https://gist.githubusercontent.com/AllenHo2/d049ea2fcf61c90a9b220f669388
           dotsVisible = !dotsVisible; // Toggle visibility state
       }
 
-
+      //Event Listener for button click
       var button = document.createElement("button");
       button.textContent = "Dots Visibility";
       button.addEventListener("click", toggleDotsVisibility);

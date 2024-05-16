@@ -52,8 +52,8 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/1c1f1f40b26de1b56c657c472a80
     .attr('fill', function (d) {return myColor(d['Carbon']);})
     .append('title')
     .text((d) => d['Carbon'] + ' Tons');
-
-    svg
+  //X Axis
+  svg
     .append('g')
     .attr('class', 'axis')
     .attr('transform', 'translate( 0 , ' + h + ')')
@@ -63,19 +63,22 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/1c1f1f40b26de1b56c657c472a80
     .style('stroke', "black")
     .style('fill', '0');
 
-  var yAxis = d3.axisLeft().scale(y);
+    var yAxis = d3.axisLeft().scale(y);
+  //Y axis
   svg.append('g')
-  .attr('class', 'axis')
-  .call(yAxis)
-  .style('stroke', "black")
-  .style("font-size", 20);
+    .attr('class', 'axis')
+    .call(yAxis)
+    .style('stroke', "black")
+    .style("font-size", 20);
 
+  //Sequential Legend
   svg
     .append('g')
     .attr('class', 'legendSequential')
     .style('stroke', "black")
     .attr('transform', 'translate(1000,15)');
 
+  //Legend Label
   svg
     .append('text')
     .attr('transform', 'translate(940,5)')
@@ -90,21 +93,25 @@ d3.csv('https://gist.githubusercontent.com/AllenHo2/1c1f1f40b26de1b56c657c472a80
     .orient('vertical')
     .scale(myColor);
 
+  //Call Legend
   svg.select('.legendSequential').call(legendSequential);
 
+  //Y Axis Label
+  svg
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (h / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .style('stroke', "black")
+    .text("Atmospheric Carbon Levels (Tons)");
+    
+  //X Axis Label
   svg.append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("y", 0 - margin.left)
-  .attr("x",0 - (h / 2))
-  .attr("dy", "1em")
-  .style("text-anchor", "middle")
-  .style('stroke', "black")
-  .text("Atmospheric Carbon Levels (Tons)");
-
-  svg.append("text")
-  .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
-  .style("text-anchor", "middle")
-  .style("font-size", 20)
-  .style("stroke", "black")
-  .text("Year");
+    .attr("transform", "translate(" + (w/2) + " ," + (h + margin.top + 20) + ")")
+    .style("text-anchor", "middle")
+    .style("font-size", 20)
+    .style("stroke", "black")
+    .text("Year");
 });

@@ -25,9 +25,9 @@ Then enter the project repository by using
 ```bash
 cd Environmental-Impacts-in-the-21st-Century
 ```
-After that if you can run this locally and do the normal git procedure as usual
+After that if you can run this locally and do the normal git procedure as usual if you wish to change the code locally.
 <br/>
-Open a live server on preferred IDE, then do the normal git procedure to push your code locally into your own github 
+Open a live server on preferred IDE, then do the normal git procedure to push your code locally into your own Github.
 ```bash
 git add <FILES>
 git commit -m "<COMMIT_MESSAGES>"
