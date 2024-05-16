@@ -54,6 +54,8 @@ However, this is not needed since the node modules are already in my code for yo
 <a href="https://html5up.net/highlights">HTML template</a>
 </br>
 <a href="https://www.npmjs.com/package/d3-regression">D3 Regression Npm</a>
+</br>
+<a href="https://usafacts.org/data/topics/security-safety/energy-and-environment/">Dataset</a>
 
 ## Connect
 <a href="https://www.linkedin.com/in/allen-ho-b67a6725b/"><img width="58" alt="Linkedin_icon" src="https://github.com/AllenHo2/project02-Elevator/assets/112123839/38209676-0df8-4cdf-a99e-e172deb63854" href="https://www.linkedin.com/in/allen-ho-b67a6725b/"></img></a>
